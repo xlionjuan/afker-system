@@ -1,27 +1,27 @@
 ---
 name: build-ublue-custom
 on:
-  pull_request:
-    branches:
-      - main
+  #pull_request:
+    #branches:
+      #- main
   schedule:
     - cron: '05 10 5 * *'  # Runs at 10:05am UTC on the 5th of every month
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - '**/README.md'
+  #push:
+    #branches:
+      #- main
+    #paths-ignore:
+      #- '**/README.md'
   workflow_dispatch:
 
 env:
   MY_IMAGE_NAME: "${{ github.event.repository.name }}"  # the name of the image produced by this build, matches repo names
-  MY_IMAGE_DESC: "My Customized Universal Blue Image"
+  MY_IMAGE_DESC: " AFKer, for single purpose, especially for some online services or web applications like some streaming platforms, using ublue/kinoite (KDE). "
   IMAGE_REGISTRY: "ghcr.io/${{ github.repository_owner }}"  # do not edit
 
 jobs:
   build_push:
     name: Build and push image
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
 
     permissions:
       contents: read
