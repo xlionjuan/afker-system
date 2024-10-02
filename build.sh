@@ -52,7 +52,7 @@ curl -fsSl https://pkg.cloudflareclient.com/cloudflare-warp-ascii.repo | tee /et
 
 
 # Install
-rpm-ostree install cloudflare-warp htop plasma-workspace-x11 bootc
+rpm-ostree install cloudflare-warp htop plasma-workspace-x11 bootc ntpd-rs
 
 ### Install packages
 
@@ -71,3 +71,6 @@ rpm-ostree install cloudflare-warp htop plasma-workspace-x11 bootc
 
 systemctl enable rustdesk.service
 systemctl enable warp-svc.service
+
+systemctl disable chronyd
+systemctl enable ntpd-rs
