@@ -12,7 +12,7 @@ ln -s "/var/opt"  "/opt"
 
 
 # Add xlion-rustdesk-rpm-repo.repo to /etc/yum.repos.d/
-curl -fsSl https://xlionjuan.github.io/rustdesk-rpm-repo/nightly.repo | sudo tee /etc/yum.repos.d/xlion-rustdesk-rpm-repo.repo
+curl -fsSl https://xlionjuan.github.io/rustdesk-rpm-repo/nightly.repo | tee /etc/yum.repos.d/xlion-rustdesk-rpm-repo.repo
 
 
 # Add cloudflare-warp.repo to /etc/yum.repos.d/
