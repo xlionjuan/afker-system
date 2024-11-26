@@ -20,7 +20,7 @@ curl -fsSl https://pkg.cloudflareclient.com/cloudflare-warp-ascii.repo | tee /et
 
 
 # Install
-rpm-ostree install cloudflare-warp htop plasma-workspace-x11 bootc ntpd-rs rustdesk
+dnf5 install -y install cloudflare-warp htop plasma-workspace-x11 ntpd-rs rustdesk
 
 ### Install packages
 
