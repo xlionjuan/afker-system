@@ -1,0 +1,20 @@
+name: Cleanup Old Images
+on:
+  schedule:
+    - cron: "15 7 * * 2" # Runs at 07:15, only on Tuesday.  
+  workflow_dispatch:
+
+jobs:
+  delete-older-than-90:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+    steps:
+      - name: Delete Images Older Than 90 Days
+        uses: dataaxiom/ghcr-cleanup-action@v1
+        with:
+          packages: afker-system
+          older-than: 90 days
+          delete-orphaned-images: true
+          keep-n-tagged: 7
+          keep-n-untagged: 7
