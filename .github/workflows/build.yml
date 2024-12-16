@@ -133,8 +133,8 @@
             image: ${{ steps.build_image.outputs.image }}
             tags: ${{ steps.build_image.outputs.tags }}
             registry: ${{ env.IMAGE_REGISTRY }}
-            #extra-args: |
-              #--compression-format=zstd
+            extra-args: |
+              --compression-format=zstd
   
         # This section is optional and only needs to be enabled if you plan on distributing
         # your project for others to consume. You will need to create a public and private key
