@@ -52,6 +52,6 @@ dnf5 copr enable -y bieszczaders/kernel-cachyos-lto
 dnf5 copr enable -y bieszczaders/kernel-cachyos-addons
 rpm-ostree install kernel-cachyos-lto kernel-cachyos-lto-devel-matched
 setsebool -P domain_kernel_load_modules on
-dnf5 -y install scx-scheds cachyos-settings uksmd
-systemctl enable scx.service
-systemctl enable uksmd.service
+#dnf5 -y install scx-scheds cachyos-settings uksmd
+#systemctl enable scx.service
+#systemctl enable uksmd.service
