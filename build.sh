@@ -21,9 +21,6 @@ curl -fsSl https://pkg.cloudflareclient.com/cloudflare-warp-ascii.repo | tee /et
 # Install
 dnf5 install -y install cloudflare-warp htop plasma-workspace-x11 ntpd-rs rustdesk
 
-semanage fcontext -a -t bin_t "/usr/lib/rustdesk/rustdesk"
-restorecon -v "/usr/lib/rustdesk/rustdesk"
-
 ### Install packages
 
 # Packages can be installed from any enabled yum repo on the image.
