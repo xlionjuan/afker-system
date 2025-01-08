@@ -13,6 +13,7 @@ mkdir -p "/var/usrlocal" && ln -s "/var/usrlocal" "/usr/local"
 # Add xlion-rustdesk-rpm-repo.repo to /etc/yum.repos.d/
 curl -fsSl https://xlionjuan.github.io/rustdesk-rpm-repo/nightly.repo | tee /etc/yum.repos.d/xlion-rustdesk-rpm-repo.repo
 
+curl -fsSl https://xlionjuan.github.io/ntpd-rs-repos/rpm/xlion-ntpd-rs-repo.repo | tee /etc/yum.repos.d/xlion-ntpd-rs-repo.repo
 
 # Add cloudflare-warp.repo to /etc/yum.repos.d/
 curl -fsSl https://pkg.cloudflareclient.com/cloudflare-warp-ascii.repo | tee /etc/yum.repos.d/cloudflare-warp.repo
@@ -43,11 +44,10 @@ systemctl disable chronyd
 systemctl enable ntpd-rs
 
 # CachyOS Kernel
-#dnf5 -y remove kernel kernel-core kernel-modules kernel-modules-core kernel-modules-extra zram-generator-defaults
-#dnf5 copr enable -y bieszczaders/kernel-cachyos-lto
+dnf5 -y remove kernel kernel-headers kernel-core kernel-modules kernel-modules-core kernel-modules-extra zram-generator-defaults
+dnf5 copr enable -y bieszczaders/kernel-cachyos-lto
 dnf5 copr enable -y bieszczaders/kernel-cachyos-addons
-#rpm-ostree install kernel-cachyos-lto kernel-cachyos-lto-devel-matched
-#setsebool -P domain_kernel_load_modules on
+rpm-ostree install kernel-cachyos-lto kernel-cachyos-lto-devel-matched
 dnf5 -y install scx-scheds cachyos-settings uksmd
 systemctl enable scx.service
 systemctl enable uksmd.service
