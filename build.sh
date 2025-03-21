@@ -10,6 +10,9 @@ echo "Creating multiple symlinks that didn't created in the image yet"
 mkdir -p "/var/opt" && ln -s "/var/opt"  "/opt"
 mkdir -p "/var/usrlocal" && ln -s "/var/usrlocal" "/usr/local"
 
+dnf5 reinstall -y dnf5
+dnf5 upgrade -y dnf5
+
 # Add xlion-rustdesk-rpm-repo.repo to /etc/yum.repos.d/
 curl -fsSl https://xlionjuan.github.io/rustdesk-rpm-repo/nightly.repo | tee /etc/yum.repos.d/xlion-rustdesk-rpm-repo.repo
 
