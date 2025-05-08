@@ -23,7 +23,7 @@ curl -fsSl https://pkg.cloudflareclient.com/cloudflare-warp-ascii.repo | tee /et
 
 
 # Install
-dnf5 install -y install cloudflare-warp htop plasma-workspace-x11 ntpd-rs rustdesk
+dnf5 install -y install cloudflare-warp htop plasma-workspace-x11 ntpd-rs rustdesk linuxptp
 
 ### Install packages
 
@@ -46,11 +46,16 @@ systemctl enable warp-svc.service
 systemctl disable chronyd
 systemctl enable ntpd-rs
 
-# CachyOS Kernel
-dnf5 -y remove kernel kernel-headers kernel-core kernel-modules kernel-modules-core kernel-modules-extra zram-generator-defaults
-dnf5 copr enable -y bieszczaders/kernel-cachyos-lto
-dnf5 copr enable -y bieszczaders/kernel-cachyos-addons
-rpm-ostree install kernel-cachyos-lto kernel-cachyos-lto-devel-matched
-dnf5 -y install scx-scheds cachyos-settings uksmd
-systemctl enable scx.service
-#systemctl enable uksmd.service
+# KVM PTP setup
+echo "ptp_kvm" | tee /etc/modules-load.d/ptp_kvm.conf
+echo 'OPTIONS="-s /dev/ptp0 -c CLOCK_REALTIME -O 0 -m"' | tee /etc/sysconfig/phc2sys
+systemctl enable phc2sys.service
+
+# # CachyOS Kernel
+# dnf5 -y remove kernel kernel-headers kernel-core kernel-modules kernel-modules-core kernel-modules-extra zram-generator-defaults
+# dnf5 copr enable -y bieszczaders/kernel-cachyos-lto
+# dnf5 copr enable -y bieszczaders/kernel-cachyos-addons
+# rpm-ostree install kernel-cachyos-lto kernel-cachyos-lto-devel-matched
+# dnf5 -y install scx-scheds cachyos-settings uksmd
+# systemctl enable scx.service
+# #systemctl enable uksmd.service
