@@ -25,6 +25,13 @@ curl -fsSl https://pkg.cloudflareclient.com/cloudflare-warp-ascii.repo | tee /et
 # Install
 dnf5 install -y install cloudflare-warp htop btop plasma-workspace-x11 ntpd-rs rustdesk
 
+# journalctl
+
+mkdir -p /usr/local/lib/systemd/journald.conf.d
+echo '[Journal]
+SystemMaxUse=50M
+' | tee /usr/local/lib/systemd/journald.conf.d/00-journal-size.conf
+
 ### Install packages
 
 # Packages can be installed from any enabled yum repo on the image.
