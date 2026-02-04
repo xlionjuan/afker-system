@@ -7,11 +7,19 @@ RELEASE="$(rpm -E %fedora)"
 # https://github.com/blue-build/modules/blob/bc0cfd7381680dc8d4c60f551980c517abd7b71f/modules/rpm-ostree/rpm-ostree.sh#L16
 echo "Creating multiple symlinks that didn't created in the image yet"
 # Create symlink for /opt to /var/opt since it is not created in the image yet
-mkdir -p "/var/opt" && ln -s "/var/opt"  "/opt"
-mkdir -p "/var/usrlocal" && ln -s "/var/usrlocal" "/usr/local"
+#mkdir -p "/var/opt" && ln -s "/var/opt"  "/opt"
+#mkdir -p "/var/usrlocal" && ln -s "/var/usrlocal" "/usr/local"
+
+rm -rf /opt
+install -d -m 755 -o root -g root /opt
 
 dnf5 reinstall -y dnf5
 dnf5 upgrade -y dnf5
+
+dnf5 copr enable -y imput/helium
+
+# https://bootc-dev.github.io/bootc/filesystem.html 
+systemctl enable ostree-state-overlay@opt.service
 
 # Add xlion-rustdesk-rpm-repo.repo to /etc/yum.repos.d/
 curl -fsSl https://xlionjuan.github.io/rustdesk-rpm-repo/nightly.repo | tee /etc/yum.repos.d/xlion-rustdesk-rpm-repo.repo
@@ -23,7 +31,7 @@ curl -fsSl https://pkg.cloudflareclient.com/cloudflare-warp-ascii.repo | tee /et
 
 
 # Install
-dnf5 install -y install cloudflare-warp htop btop plasma-workspace-x11 ntpd-rs rustdesk
+dnf5 install -y install cloudflare-warp htop btop plasma-workspace-x11 ntpd-rs rustdesk helium-bin
 
 # journalctl
 
