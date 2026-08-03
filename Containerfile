@@ -1,4 +1,4 @@
-FROM ghcr.io/ublue-os/kinoite-main:gts
+FROM ghcr.io/ublue-os/kinoite-main:gts@sha256:2deee55d6c704ff220afce9b32edc38cae9cfb0811fbba8010a670e5d4253e2b
 
 ### 3. MODIFICATIONS
 ## make modifications desired in your image and install packages by modifying the build.sh script
